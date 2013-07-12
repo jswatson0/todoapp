@@ -5,19 +5,35 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%# user is logged in, show log out link %>
-  <% if current_user.present? %>
-    <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
-  <%# user is not logged in, show signup and login links %>
-  <% else %>
-    <%= link_to 'Sign In', new_user_session_path %> |
-    <%= link_to 'Register Now!', new_user_registration_path %>
-  <% end %>
+
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">The ToDoApp</a>
+        <ul class="nav pull-right">
+          <% if current_user.present? %>
+          <%# user is logged in, show log out link, user tasks, create new task %>
+            <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %> |
+            <%= link_to 'My Tasks', tasks_path %> |
+            <%= link_to 'Create Task', new_task_path %>
+          <%# user is not logged in, show signup and login links %>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path %> |
+            <%= link_to 'Register Now!', new_user_registration_path %>
+          <% end %>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
 <%= yield %>
 
+<!-- <p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p> -->
 </body>
 </html>
